@@ -10,44 +10,16 @@ namespace BubbleSorting
     {
         delegate int ToS(int[] arr);
         delegate bool OrS(int a, int b);
-        public static void Sorting(int[][] arr, Order or, TypeOfSort ts)
+        public static void Sorting(int[][] arr,IComparabe comp)
         {
             int capacity = PreSorting(arr);
-            ToS O;
-            OrS op;
-            switch (ts)
-            {
-                case TypeOfSort.Min:
-                    O = new ToS(MinElem);
-                    break;
-                case TypeOfSort.Max:
-                    O = new ToS(MaxElem);
-                    break;
-                case TypeOfSort.Summ:
-                    O = new ToS(SummArr);
-                    break;
-                default:
-                    O = new ToS(MinElem);
-                    break;
-            }
-            switch (or)
-            {
-                case Order.Inverse:
-                    op = new OrS(CompR);
-                    break;
-                case Order.Straight:
-                    op = new OrS(CompS);
-                    break;
-
-                default:
-                    op = new OrS(CompS);
-                    break;
-            }
+           
             for (int i = 0; i < capacity; i++)
             {
                 for (int j = capacity - 1; j > i; j--)
                 {
-                    if (op(O(arr[j]), O(arr[j - 1])))
+                    if(comp.Compare(arr[j-1],arr[j]))
+                   // if (op(O(arr[j]), O(arr[j - 1])))
                     {
 
                         int[] ar = arr[j];
